@@ -2,6 +2,7 @@
 
 class Model_Concerts extends Model {
 
+<<<<<<< HEAD
     protected $concerts_table = 'concerts';
     protected $orders_table = 'orders';
     
@@ -29,18 +30,30 @@ class Model_Concerts extends Model {
         return false;
     }
     
+=======
+    public function get_all_concerts() {
+	
+    }
+
+>>>>>>> created main structure
     public function get_all_orders() {
 	
     }
 
+<<<<<<< HEAD
     public function insert_concert($image, $date_time, $price, $description) {
         
+=======
+    public function insert_concert($image, $date_time, $cost, $description) {
+	
+>>>>>>> created main structure
     }
 
     public function delete_concert($id) {
 	
     }
 
+<<<<<<< HEAD
     public function update_concert($id, $date_time, $price, $description) {
 	
     }
@@ -65,10 +78,22 @@ class Model_Concerts extends Model {
             return true;
         }
         return false;
+=======
+    public function update_concert($id, $image, $date_time, $cost, $description) {
+	
+    }
+
+    public function insert_order($fio, $phone, $concert_id, $tickets, $status) {
+	
+>>>>>>> created main structure
     }
 
     public function change_order_status($id) {
 	
     }
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> created main structure
