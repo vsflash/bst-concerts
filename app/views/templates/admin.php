@@ -10,13 +10,18 @@
     <div>
         <h2>Меню</h2>
         <ul>
+            <li><a href="/admin">Home</a></li>
             <li><a href="/admin/orders">Orders</a></li>
             <li><a href="/admin/concerts">Concerts</a></li>
             <li><a href="/admin/users">Users</a></li>
         </ul>
     </div>
     <section>
-        <?php include_once $content_template_file; ?>
+        <?php 
+        if($this->content_view) {
+            include_once $this->content_view; 
+        }
+        ?>
     </section>
 </body>
 </html>
