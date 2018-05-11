@@ -13,5 +13,5 @@ abstract class Model {
         $password = '';
         $db = 'bst_concerts';
         $this->db = new PDO('mysql:host='.$host.';dbname='.$db, $user, $password);
-    }
+
 }
