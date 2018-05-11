@@ -1,4 +1,4 @@
-<a href="/admin/add">Add new concert</a>
+<a href="/admin/concerts/add">Add new concert</a>
 <?php if($this->all_concerts):?>
     <table>
         <tr>
