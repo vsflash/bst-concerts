@@ -4,11 +4,11 @@ class Route {
 
     static public function start() {
 	// контроллер и действие по умолчанию
-	$controller_name = 'Main';
+	$controller_name = 'Concerts';
 	$action_name = 'index';
 
 	$routes = explode('/', $_SERVER['REQUEST_URI']);
-
+        
 	// получаем имя контроллера
 	if (!empty($routes[1])) {
 	    $controller_name = ucfirst($routes[1]);
