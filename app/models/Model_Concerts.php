@@ -1,17 +1,9 @@
 <?php
-
 class Model_Concerts extends Model {
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> all concerts admin
     protected $concerts_table = 'concerts';
     protected $orders_table = 'orders';
     
     public function __construct() {
-<<<<<<< HEAD
-<<<<<<< HEAD
         parent::__construct();        
     }
     
@@ -24,7 +16,6 @@ class Model_Concerts extends Model {
         }
         return false;
     }
-
     public function get_one_concert($id) {
         $query = 'select * from '.$this->concerts_table.' where id='.$id;
         $stmt = $this->db->prepare($query);
@@ -35,41 +26,6 @@ class Model_Concerts extends Model {
         return false;
     }
     
-=======
-=======
-        parent::__construct();
-        require_once 'app/config/db.php';
-        $this->db = new PDO('mysql:host='.$host.';dbname='.$db, $user, $password);
-=======
-        parent::__construct();        
->>>>>>> added functionality to admin: orders (show, change status, filter); users (show, add, delete)
-    }
-    
->>>>>>> all concerts admin
-    public function get_all_concerts() {
-	$query = 'select * from '.$this->concerts_table;
-        $stmt = $this->db->prepare($query);
-        $stmt->execute();
-        if($result = $stmt->fetchAll()) {
-            return $result;
-        }
-        return false;
-    }
-
-<<<<<<< HEAD
->>>>>>> created main structure
-=======
-    public function get_one_concert($id) {
-        $query = 'select * from '.$this->concerts_table.' where id='.$id;
-        $stmt = $this->db->prepare($query);
-        $stmt->execute();
-        if($result = $stmt->fetch()) {
-            return $result;
-        }
-        return false;
-    }
-    
->>>>>>> made edit|delete concerts functionality
     public function get_all_orders() {
 	$query = 'select orders.id, orders.name, orders.phone, orders.count_of_tickets, orders.status, concerts.description from '.$this->orders_table.' join '.$this->concerts_table.' on orders.concert_id=concerts.id';
         $stmt = $this->db->prepare($query);
@@ -79,18 +35,6 @@ class Model_Concerts extends Model {
         }
         return false;
     }
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-    public function insert_concert($image, $date_time, $price, $description) {
-        
-=======
-    public function insert_concert($image, $date_time, $cost, $description) {
-	
->>>>>>> created main structure
-=======
-=======
     public function get_unprocessed_orders() {
         $query = 'select orders.id, orders.name, orders.phone, orders.count_of_tickets, orders.status, concerts.description from '.$this->orders_table.' join '.$this->concerts_table.' on orders.concert_id=concerts.id where orders.status=0';
         $stmt = $this->db->prepare($query);
@@ -101,7 +45,6 @@ class Model_Concerts extends Model {
         return false;
     }
     
->>>>>>> added functionality to admin: orders (show, change status, filter); users (show, add, delete)
     public function insert_concert($image, $date_time, $price, $description) {
 	$query = 'insert into '.$this->concerts_table.' (image, date, price, description) values(:image, :date,:price,:desc)';
         $stmt = $this->db->prepare($query);
@@ -113,9 +56,7 @@ class Model_Concerts extends Model {
             return true;
         }
         return false;
->>>>>>> made edit|delete concerts functionality
     }
-
     public function delete_concert($id) {
 	$query = 'delete from '.$this->concerts_table.' where id='.$id;
         $stmt = $this->db->prepare($query);
@@ -124,30 +65,6 @@ class Model_Concerts extends Model {
         }
         return false;
     }
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-    public function update_concert($id, $date_time, $price, $description) {
-	
-    }
-
-    public function insert_order($name, $phone, $concert_id, $count_of_tickets) {
-//	$query = "insert into ".$this->orders_table." (name, phone, concert_id, count_of_tickets)"
-//                . " values('".$name."', '".$phone."', '".$concert_id."','".$count_of_tickets."');";
-//        $queryResult = $this->dbConnection->query($query);
-//	if ($queryResult) {
-//	    return true;
-//	}
-//	return false;
-//        
-	$query = 'insert into '.$this->orders_table.' (name, phone, concert_id, count_of_tickets)'
-                . ' values(:name, :phone,:concert_id,:count_of_tickets)';
-        $stmt = $this->db->prepare($query);
-        $stmt->bindParam(':name', $name);
-        $stmt->bindParam(':phone', $phone);
-        $stmt->bindParam(':concert_id', $concert_id);
-        $stmt->bindParam(':count_of_tickets', $count_of_tickets);
-=======
     public function update_concert($id, $date_time, $price, $description) {
 	$query = 'update '.$this->concerts_table.' set date=:date, price=:price, description=:desc where id=:id';
         $stmt = $this->db->prepare($query);
@@ -155,24 +72,12 @@ class Model_Concerts extends Model {
         $stmt->bindParam(':price', $price);
         $stmt->bindParam(':desc', $description);
         $stmt->bindParam(':id', $id);
->>>>>>> made edit|delete concerts functionality
         if($stmt->execute()) {
             return true;
         }
         return false;
-<<<<<<< HEAD
-=======
-    public function update_concert($id, $image, $date_time, $cost, $description) {
-	
-=======
->>>>>>> made edit|delete concerts functionality
     }
-
-    public function insert_order($fio, $phone, $concert_id, $tickets, $status) {
-	
->>>>>>> created main structure
-    }
-
+    
     public function change_order_status($id) {
 	$query = 'update '.$this->orders_table.' set status=1 where id=:id';
         $stmt = $this->db->prepare($query);
@@ -182,9 +87,19 @@ class Model_Concerts extends Model {
         }
         return false;
     }
+    
+    public function insert_order($name, $phone, $concert_id, $count_of_tickets) {    
+	$query = 'insert into '.$this->orders_table.' (name, phone, concert_id, count_of_tickets)'
+                . ' values(:name, :phone,:concert_id,:count_of_tickets)';
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':name', $name);
+        $stmt->bindParam(':phone', $phone);
+        $stmt->bindParam(':concert_id', $concert_id);
+        $stmt->bindParam(':count_of_tickets', $count_of_tickets);
+        if($stmt->execute()) {
+            return true;
+        }
+        return false;
+    }
 
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> created main structure
