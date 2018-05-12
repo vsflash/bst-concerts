@@ -7,7 +7,8 @@ class Controller_Admin extends Controller {
 
     protected $model_concerts;
     protected $model_users;
-
+    const AVAILABLE_ORDERS_FILTERS = array('all', 'unprocessed');
+    
     public function __construct() {
         parent::__construct();
         $this->model_users = new Model_Users();
@@ -92,13 +93,29 @@ class Controller_Admin extends Controller {
     }
 
     public function order_all() {
-        echo 'all orders';
+        if(!$_SESSION['filter']) {
+            $_SESSION['filter'] = 'unprocessed';
+        }
+        $get_orders = 'get_'.$_SESSION['filter'].'_orders';
+        $this->view->orders_filters = self::AVAILABLE_ORDERS_FILTERS;
+        $this->view->all_unprocessed_orders = $this->model_concerts->$get_orders();
+        $this->view->content_view = 'app/views/admin/orders.php';
+        $this->view->render();
     }
     
-    public function order_proceed() {
-        echo 'Change order status';
+    public function order_proceed($ID) {
+        $this->model_concerts->change_order_status($ID);
+        
+        Route::redirect('/admin/orders');
     }
 
+    public function order_filter($filter) {
+        if(in_array($filter, self::AVAILABLE_ORDERS_FILTERS)) {
+            $_SESSION['filter'] = $filter;
+        }
+        Route::redirect('/admin/orders');
+    }
+    
     public function action_users($params = null) {
         $additional_action = 'user_all';
         if ($params) {
@@ -112,19 +129,29 @@ class Controller_Admin extends Controller {
     }
 
     public function user_all() {
-        echo 'all users';
+        $this->view->all_users = $this->model_users->get_all_users();
+        $this->view->content_view = 'app/views/admin/users.php';
+        $this->view->render();
     }
     
     public function user_add() {
-        echo 'form';
+        $this->view->content_view = 'app/views/admin/add_user.php';
+        $this->view->render();
     }
 
     public function user_insert() {
+        if(filter_input(INPUT_POST, 'send')){
+            extract(filter_input_array(INPUT_POST));
+            $this->model_users->insert_user($login, $email, password_hash($password, PASSWORD_DEFAULT));
+        }
         
+        Route::redirect('/admin/users');
     }
 
-    public function user_delete() {
+    public function user_delete($ID) {
+        $this->model_users->delete_user($ID);
         
+        Route::redirect('/admin/users');
     }
 
 }

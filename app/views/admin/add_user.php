@@ -1,8 +1,19 @@
-<?php
-
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
+<form method="post" action="/admin/users/insert">
+    <label>
+        <span>Login</span>
+        <input type="text" name="login" required>
+    </label>
+    <label>
+        <span>Email</span>
+        <input type="email" name="email" required>
+    </label>
+    <label>
+        <span>Password</span>
+        <input type="password" namae="password" required>
+    </label>
+    <label>
+        <span>Confirm password</span>
+        <input type="password" name="conf_password" required>
+    </label>
+    <input type="submit" name="send" value="Add">
+</form>
