@@ -1,6 +1,7 @@
 <?php
 
 abstract class Model {
+
 //    abstract public function get_all();
 
     /**
@@ -10,6 +11,7 @@ abstract class Model {
     protected $db;
 
     public function __construct() {
+
 	$host = 'localhost';
 	$user = 'root';
 	$password = '';

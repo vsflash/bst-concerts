@@ -11,6 +11,7 @@ class Model_Concerts extends Model {
     
     public function __construct() {
 <<<<<<< HEAD
+<<<<<<< HEAD
         parent::__construct();        
     }
     
@@ -39,6 +40,9 @@ class Model_Concerts extends Model {
         parent::__construct();
         require_once 'app/config/db.php';
         $this->db = new PDO('mysql:host='.$host.';dbname='.$db, $user, $password);
+=======
+        parent::__construct();        
+>>>>>>> added functionality to admin: orders (show, change status, filter); users (show, add, delete)
     }
     
 >>>>>>> all concerts admin
@@ -67,9 +71,16 @@ class Model_Concerts extends Model {
     
 >>>>>>> made edit|delete concerts functionality
     public function get_all_orders() {
-	
+	$query = 'select orders.id, orders.name, orders.phone, orders.count_of_tickets, orders.status, concerts.description from '.$this->orders_table.' join '.$this->concerts_table.' on orders.concert_id=concerts.id';
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        if($result = $stmt->fetchAll()) {
+            return $result;
+        }
+        return false;
     }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
     public function insert_concert($image, $date_time, $price, $description) {
@@ -79,6 +90,18 @@ class Model_Concerts extends Model {
 	
 >>>>>>> created main structure
 =======
+=======
+    public function get_unprocessed_orders() {
+        $query = 'select orders.id, orders.name, orders.phone, orders.count_of_tickets, orders.status, concerts.description from '.$this->orders_table.' join '.$this->concerts_table.' on orders.concert_id=concerts.id where orders.status=0';
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        if($result = $stmt->fetchAll()) {
+            return $result;
+        }
+        return false;
+    }
+    
+>>>>>>> added functionality to admin: orders (show, change status, filter); users (show, add, delete)
     public function insert_concert($image, $date_time, $price, $description) {
 	$query = 'insert into '.$this->concerts_table.' (image, date, price, description) values(:image, :date,:price,:desc)';
         $stmt = $this->db->prepare($query);
@@ -151,7 +174,13 @@ class Model_Concerts extends Model {
     }
 
     public function change_order_status($id) {
-	
+	$query = 'update '.$this->orders_table.' set status=1 where id=:id';
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':id', $id);
+        if($stmt->execute()) {
+            return true;
+        }
+        return false;
     }
 
 <<<<<<< HEAD
