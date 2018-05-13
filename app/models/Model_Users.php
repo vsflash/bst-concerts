@@ -18,7 +18,7 @@ class Model_Users extends Model {
     }
     
     public function getUserByLogin($login) { //новый метод
-        $query = "SELECT * FROM users WHERE login LIKE ':login';";
+        $query = "SELECT * FROM ".$this->users_table." WHERE login LIKE :login;";
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':login', $login);
         $stmt->execute();
