@@ -142,10 +142,14 @@ class Controller_Admin extends Controller {
     public function user_insert() {
         if(filter_input(INPUT_POST, 'send')){
             extract(filter_input_array(INPUT_POST));
-            $this->model_users->insert_user($login, $email, password_hash($password, PASSWORD_DEFAULT));
-        }
-        
-        Route::redirect('/admin/users');
+            if($password === $conf_password) {
+                $this->model_users->insert_user($login, $email, password_hash($password, PASSWORD_DEFAULT));
+            } else {
+                Route::redirect('/admin/users/add');
+            }
+        } else {
+            Route::redirect('/admin/users');
+        }       
     }
 
     public function user_delete($ID) {
