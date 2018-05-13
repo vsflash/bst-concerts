@@ -25,6 +25,7 @@ class Controller_Auth extends Controller {
         if ($user['pass'] !== $user['confPass']) {
             Route::redirect('auth/register');
         }
+
         if ($this->model->insert_user($user['login'], $user['email'], password_hash($user['pass'], PASSWORD_DEFAULT))) {
             Route::redirect('/admin');
         }
