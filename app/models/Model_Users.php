@@ -1,6 +1,5 @@
 <?php
 
-
 class Model_Users extends Model {
     protected $users_table = 'users';
     
@@ -18,14 +17,13 @@ class Model_Users extends Model {
         return false;
     }
     
-    public function insert_user($login, $email, $password) {
-        $query = 'insert into '.$this->users_table.' (login, email, password) values(:login, :email, :password)';
+    public function getUserByLogin($login) { //новый метод
+        $query = "SELECT * FROM users WHERE login LIKE ':login';";
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':login', $login);
-        $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':password', $password);
-        if($stmt->execute()) {
-            return true;
+        $stmt->execute();
+        if ($result = $stmt->fetch()) {
+            return $result;
         }
         return false;
     }
@@ -33,6 +31,18 @@ class Model_Users extends Model {
     public function delete_user($ID) {
         $query = 'delete from '.$this->users_table.' where id='.$ID;
         $stmt = $this->db->prepare($query);
+        if($stmt->execute()) {
+            return true;
+        }
+        return false;
+    }
+    
+    public function insert_user($login, $email, $password) {
+        $query = 'insert into '.$this->users_table.' (login, email, password) values(:login, :email, :password)';
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':login', $login);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':password', $password);
         if($stmt->execute()) {
             return true;
         }
