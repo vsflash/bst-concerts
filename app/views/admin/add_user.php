@@ -9,7 +9,7 @@
     </label>
     <label>
         <span>Password</span>
-        <input type="password" namae="password" required>
+        <input type="password" name="password" required>
     </label>
     <label>
         <span>Confirm password</span>
