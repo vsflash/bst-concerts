@@ -1,4 +1,5 @@
-<?php if (!empty($this->concert)): ?>
+<?php
+if (!empty($this->concert)): ?>
 <form method=post action="order_process">
         <input type=hidden name=concert_id value="<?= $this->concert['id'] ?>">
         <h1 align=center>Заказать билеты <?= $this->concert['description'] ?></h1>

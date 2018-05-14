@@ -1,7 +1,7 @@
 <?php
-require_once 'core/Model.php';
-require_once 'core/View.php';
-require_once 'core/Controller.php';
-require_once 'core/Route.php';
+require_once 'app/core/Model.php';
+require_once 'app/core/View.php';
+require_once 'app/core/Controller.php';
+require_once 'app/core/Route.php';
 Route::start(); // запускаем маршрутизатор
 

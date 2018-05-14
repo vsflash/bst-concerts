@@ -1,5 +1,5 @@
 <?php
 $host = 'localhost';
 $user = 'root';
-$password = '';
+$password = 'root';
 $db = 'bst_concerts';
