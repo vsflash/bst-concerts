@@ -1,20 +1,91 @@
 <?php
 
+class Model_Concerts extends Model {
 
-class Model_News extends Model {
-    public function get_data() {
-        return array(
-            array(
-                'title' => 'First',
-                'date' => '22.05.1985',
-                'text' => 'Промо-сайт темного пива Dunkel от немецкого производителя Löwenbraü выпускаемого в России пивоваренной компанией "CАН ИнБев".'
-            ),
-            array(
-                'title' => '2012',
-                'date' => '15.12.2008',
-                'text' => 'Русскоязычный каталог китайских телефонов компании Zopo на базе Android OS и аксессуаров к ним.'
-            ),
-                //TODO
-        );
+    protected $concerts_table = 'concerts';
+    protected $orders_table = 'orders';
+    
+    public function __construct() {
+        parent::__construct();
+        require_once 'app/config/db.php';
+        $this->db = new PDO('mysql:host='.$host.';dbname='.$db, $user, $password);
     }
+    
+    public function get_all_concerts() {
+	$query = 'select * from '.$this->concerts_table;
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        if($result = $stmt->fetchAll()) {
+            return $result;
+        }
+        return false;
+    }
+
+    public function get_one_concert($id) {
+        $query = 'select * from '.$this->concerts_table.' where id='.$id;
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        if($result = $stmt->fetch()) {
+            return $result;
+        }
+        return false;
+    }
+    
+    public function get_all_orders() {
+	
+    }
+
+    public function insert_concert($image, $date_time, $price, $description) {
+	$query = 'insert into '.$this->concerts_table.' (image, date, price, description) values(:image, :date,:price,:desc)';
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':image', $image);
+        $stmt->bindParam(':date', $date_time);
+        $stmt->bindParam(':price', $price);
+        $stmt->bindParam(':desc', $description);
+        if($stmt->execute()) {
+            return true;
+        }
+        return false;
+    }
+
+    public function delete_concert($id) {
+	$query = 'delete from '.$this->concerts_table.' where id='.$id;
+        $stmt = $this->db->prepare($query);
+        if($stmt->execute()) {
+            return true;
+        }
+        return false;
+    }
+
+    public function update_concert($id, $date_time, $price, $description) {
+	$query = 'update '.$this->concerts_table.' set date=:date, price=:price, description=:desc where id=:id';
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':date', $date_time);
+        $stmt->bindParam(':price', $price);
+        $stmt->bindParam(':desc', $description);
+        $stmt->bindParam(':id', $id);
+        if($stmt->execute()) {
+            return true;
+        }
+        return false;
+    }
+
+    public function insert_order($name, $phone, $concert_id, $count_of_tickets, $status) {
+	$query = 'insert into '.$this->orders_table.' (name, phone, concert_id, count_of_ticket, status) values(:name, :phone,:concert_id,:count_of_ticket,:status)';
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':name', $name);
+        $stmt->bindParam(':phone', $phone);
+        $stmt->bindParam(':concert_id', $concert_id);
+        $stmt->bindParam(':count_of_tickets', $count_of_tickets);
+        $stmt->bindParam(':status', $status);
+        if($stmt->execute()) {
+            return true;
+        }
+        return false;
+    }
+
+    public function change_order_status($id) {
+	
+    }
+
 }
