@@ -11,7 +11,7 @@
         <tr>
             <td><?= $concert['description'] ?></td>
             <td><?= $concert['date'] ?></td>
-            <td><img src="/public/images/concerts/<?= $concert['image'] ?>"></td>
+            <td><img src="../public/images/concerts/<?= $concert['image'] ?>"></td>
             <td><?= $concert['price'] ?></td>
             <td>
                 <form method="post" action="order">
