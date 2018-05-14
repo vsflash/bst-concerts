@@ -6,30 +6,27 @@ class Model_Concerts extends Model {
     protected $orders_table = 'orders';
     
     public function __construct() {
-        parent::__construct();
-        //require_once 'app/config/db.php';
-        $this->dbConnection = mysqli_connect("localhost", 'root', 'root', 'bst_concerts');
-        //$this->db = new PDO('mysql:host='.$host.';dbname='.$db, $user, $password);
+        parent::__construct();        
     }
     
     public function get_all_concerts() {
-	$query = 'select * from '.$this->concerts_table.";";
-        $queryResult = $this->dbConnection->query($query);
-	if ($queryResult) {
-	    $allConcerts = $queryResult->fetch_all(MYSQLI_ASSOC);
-	    return $allConcerts;
-	}
-	return false;
+	$query = 'select * from '.$this->concerts_table;
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        if($result = $stmt->fetchAll()) {
+            return $result;
+        }
+        return false;
     }
 
     public function get_one_concert($id) {
-        $query = 'select * from '.$this->concerts_table.' where id='.$id.";";
-        $queryResult = $this->dbConnection->query($query);
-	if ($queryResult) {
-	    $oneConcert = $queryResult->fetch_array(MYSQLI_ASSOC);
-	    return $oneConcert;
-	}
-	return false;
+        $query = 'select * from '.$this->concerts_table.' where id='.$id;
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        if($result = $stmt->fetch()) {
+            return $result;
+        }
+        return false;
     }
     
     public function get_all_orders() {
@@ -49,13 +46,25 @@ class Model_Concerts extends Model {
     }
 
     public function insert_order($name, $phone, $concert_id, $count_of_tickets) {
-	$query = "insert into ".$this->orders_table." (name, phone, concert_id, count_of_tickets)"
-                . " values('".$name."', '".$phone."', '".$concert_id."','".$count_of_tickets."');";
-        $queryResult = $this->dbConnection->query($query);
-	if ($queryResult) {
-	    return true;
-	}
-	return false;
+//	$query = "insert into ".$this->orders_table." (name, phone, concert_id, count_of_tickets)"
+//                . " values('".$name."', '".$phone."', '".$concert_id."','".$count_of_tickets."');";
+//        $queryResult = $this->dbConnection->query($query);
+//	if ($queryResult) {
+//	    return true;
+//	}
+//	return false;
+//        
+	$query = 'insert into '.$this->orders_table.' (name, phone, concert_id, count_of_tickets)'
+                . ' values(:name, :phone,:concert_id,:count_of_tickets)';
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':name', $name);
+        $stmt->bindParam(':phone', $phone);
+        $stmt->bindParam(':concert_id', $concert_id);
+        $stmt->bindParam(':count_of_tickets', $count_of_tickets);
+        if($stmt->execute()) {
+            return true;
+        }
+        return false;
     }
 
     public function change_order_status($id) {
