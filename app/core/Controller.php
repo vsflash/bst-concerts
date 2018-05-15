@@ -1,7 +1,6 @@
 <?php
 
 abstract class Controller {
-
     /**
      *
      * @var Model 
