@@ -10,7 +10,7 @@
     </head>
     <body class="auth_body">
         <div class="admin_panel_top">
-            <h1 style="margin: 10px"><a href="/admin/" style="text-decoration: none; color: #666666; font-size: x-large">Admin Panel</a></h1>
+            <span style="font-size: x-large; margin: 10px">Admin Panel</span>
         </div>
         <section>
             <?php include 'app/views/' . $this->content_view; ?>
