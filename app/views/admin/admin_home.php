@@ -1,6 +1,7 @@
 <style>
     a:hover svg {
-        fill: blue;
+        fill: #007bff;
+	transition: all .2s ease-in-out;
     }
 </style>
 <div class="container-fluid mt-3">
