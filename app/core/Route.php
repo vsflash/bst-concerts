@@ -1,4 +1,7 @@
 <?php
+
+namespace app\core;
+
 class Route {
     static public function start() {
 	// контроллер и действие по умолчанию
@@ -15,18 +18,19 @@ class Route {
 	    $action_name = $routes[2];
 	}
 	// добавляем префиксы
-	$model_name = 'Model_' . $controller_name;
-	$controller_name = 'Controller_' . $controller_name;
+	$model_name = 'app\models\Model_' . $controller_name;
+	$controller_name = 'app\controllers\Controller_' . $controller_name;
 	$action_name = 'action_' . $action_name;
 	// подцепляем файл с классом модели (файла модели может и не быть)
 	$model_file = $model_name . '.php';
-	$model_path = "app/models/" . $model_file;
+	$model_path = $model_file;
+	
 	if (file_exists($model_path)) {
 	    include $model_path;
 	}
 	// подцепляем файл с классом контроллера
 	$controller_file = $controller_name . '.php';
-	$controller_path = "app/controllers/" . $controller_file;
+	$controller_path = $controller_file;
 	if (file_exists($controller_path)) {
 	    include $controller_path;
 	} else {

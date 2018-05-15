@@ -1,4 +1,6 @@
 <?php
+namespace app\models;
+use app\core\Model;
 class Model_Users extends Model {
     protected $users_table = 'users';
     public function __construct() {

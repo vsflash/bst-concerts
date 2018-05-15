@@ -1,5 +1,9 @@
 <?php
-require_once 'app/models/Model_Users.php';
+namespace app\controllers;
+
+use app\models\Model_Users;
+use app\core\Controller;
+use app\core\Route;
 class Controller_Auth extends Controller {
     public function __construct() {
         parent::__construct();

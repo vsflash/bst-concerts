@@ -1,8 +1,10 @@
 <?php
+namespace app\controllers;
 
-require_once 'app/models/Model_Users.php';
-require_once 'app/models/Model_Concerts.php';
-
+use app\models\Model_Users;
+use app\models\Model_Concerts;
+use app\core\Controller;
+use app\core\Route;
 class Controller_Admin extends Controller {
 
     protected $model_concerts;

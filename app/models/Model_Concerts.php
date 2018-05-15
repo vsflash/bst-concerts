@@ -1,4 +1,6 @@
 <?php
+namespace app\models;
+use app\core\Model;
 
 class Model_Concerts extends Model {
     protected $concerts_table = 'concerts';

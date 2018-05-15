@@ -1,4 +1,9 @@
 <?php
+
+namespace app\controllers;
+use app\core\Controller;
+use app\models\Model_Concerts;
+
 class Controller_Concerts extends Controller {
     
     public function __construct() {

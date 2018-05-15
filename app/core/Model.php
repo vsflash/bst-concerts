@@ -1,4 +1,6 @@
 <?php
+namespace app\core;
+use \PDO;
 abstract class Model {
 //    abstract public function get_all();
     /**
