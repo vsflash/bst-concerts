@@ -14,7 +14,7 @@
             <td><img src="../public/images/concerts/<?= $concert['image'] ?>"></td>
             <td><?= $concert['price'] ?></td>
             <td>
-                <form method="post" action="order">
+                <form method="post" action="/concerts/order">
                     <input type="hidden" value='<?= $concert['id'] ?>' name='id'>
                     <button type="submit">Order</button>
                 </form>

@@ -102,7 +102,7 @@ class Controller_Admin extends Controller {
         }
         $get_orders = 'get_'.$_SESSION['filter'].'_orders';
         $this->view->orders_filters = self::AVAILABLE_ORDERS_FILTERS;
-        $this->view->all_unprocessed_orders = $this->model_concerts->$get_orders();
+        $this->view->all_orders = $this->model_concerts->$get_orders();
         $this->view->content_view = 'app/views/admin/orders.php';
         $this->view->render();
     }
