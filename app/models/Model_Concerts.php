@@ -1,4 +1,5 @@
 <?php
+
 class Model_Concerts extends Model {
     protected $concerts_table = 'concerts';
     protected $orders_table = 'orders';
@@ -101,5 +102,4 @@ class Model_Concerts extends Model {
         }
         return false;
     }
-
 }
