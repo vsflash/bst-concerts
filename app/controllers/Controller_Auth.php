@@ -24,6 +24,7 @@ class Controller_Auth extends Controller {
             Route::redirect('auth/register');
         }
         if ($this->model->insert_user($user['login'], $user['email'], password_hash($user['pass'], PASSWORD_DEFAULT))) {
+	    $_SESSION['login'] = $user['login'];
             Route::redirect('/admin');
         }
     }
