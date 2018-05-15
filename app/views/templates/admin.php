@@ -2,26 +2,42 @@
 <html lang="ru">
     <head>
         <meta charset="utf-8">
-    <h1>Админка</h1>
-    <div>
-        <p>Hello <?= $_SESSION['login']; ?></p>
-    </div>
-    <p><a href="/auth/signout">Выйти</a></p>
-    <div>
-        <h2>Меню</h2>
-        <ul>
-            <li><a href="/admin">Home</a></li>
-            <li><a href="/admin/orders">Orders</a></li>
-            <li><a href="/admin/concerts">Concerts</a></li>
-            <li><a href="/admin/users">Users</a></li>
-        </ul>
-    </div>
-    <section>
-        <?php 
-        if($this->content_view) {
-            include_once $this->content_view; 
-        }
-        ?>
-    </section>
-</body>
+        <title>Admin</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="/admin">Adminka</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/admin">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/orders">Orders</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/concerts">Concerts</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/users">Users</a>
+                    </li>
+                </ul>
+                <span>Hello <?= $_SESSION['login']; ?>  <a class="nav-link d-inline " href="/auth/signout">Sign out</a></span>
+            </div>
+        </nav>
+        <section>
+            <?php
+            if ($this->content_view) {
+                include_once $this->content_view;
+            }
+            ?>
+        </section>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    </body>
 </html>

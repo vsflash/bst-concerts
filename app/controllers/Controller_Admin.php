@@ -17,6 +17,7 @@ class Controller_Admin extends Controller {
     }
 
     public function action_index() {
+        $this->view->content_view = 'app/views/admin/admin_home.php';
         $this->view->render();
     }
 
