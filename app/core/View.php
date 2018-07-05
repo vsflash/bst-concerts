@@ -1,5 +1,5 @@
 <?php
-
+namespace app\core;
 class View {
 
     public $template_view='main.php';
